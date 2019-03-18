@@ -1,0 +1,138 @@
+<form action="<?php if(is_null($id)):?>addarticle.php<?php else:?>editarticle.php<?php endif;?>" method="POST" enctype="multipart/form-data" class="text-center m-auto">
+    
+    <?php if(isset($errorForm) && count($errorForm) > 0):?>
+        <?php foreach($errorForm as $error):?>
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    <li><?=$error?></li>
+                </ul>
+            </div>
+         <?php endforeach;?>
+    <?php endif;?>
+    
+    
+    <?php if(!is_null($id)):?>
+        <input type="hidden" value="<?=$id?>" name="id">
+    <?php endif;?>
+    
+    <fieldset>
+        
+        <div class="form-group ">
+            <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="title">Titre</label>
+                    <input type="text" class="form-control rounded" id="title" name="title" value="<?=$titre?>">
+                    <small id="titleHelp" class="form-text text-muted">Saisissez un titre pour votre article</small>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="date">Date de publication</label>
+                    <input type="date" class="form-control rounded" name="date" id="date" value="<?=$datePubli->format('Y-m-d')?>">
+                    <label for="heure">Heure de la publication:</label>
+                    <input type="time" class="form-control rounded" name="heure" id="heure" value="<?=$datePubli->format('H:i:s')?>">
+                    <small id="dateHelp" class="form-text text-muted">Date et heure de la publication</small>
+                </div>
+            </div>
+        </div>
+         
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="content">Contenu de l'article:</label>
+                    <textarea class="form-control rounded" id="content" name="content" rows="6" placeholder="Ajouter le contenu de l'article"><?=$contenu?></textarea>
+                    <small id="catHelp" class="form-text text-muted">Contenu de l'article</small>
+                </div>
+            </div>
+        </div>
+         
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="photo">Image de l'article</label>
+                    <input type='hidden' name='max_file_size' value='250000'>
+                    
+                    <input type="file" class="form-control-file rounded" id="photo" name="photo"  size=50 aria-describedby="fileHelp">
+                    <?php if($photo != '' &&  $photo != null):?>
+                        <input type="hidden" name="oldPicture" value="<?=$photo?>">
+                    <?php endif;?>
+                    <?php if($pictureDisplay):?>
+                         <img src="<?=$chemin_destination.$photo?>" width="200">
+                  <?php endif;?>
+                  <small id="fileHelp" class="form-text text-muted">Sélectionnez un fichier sur votre ordinateur</small>
+                </div>
+            </div>
+        </div>
+        
+       
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="category">Catégorie de l'article</label>
+                    <select class="form-control rounded" name="category" id="category">
+                        <?php foreach($categories as $categorie):?>
+                                <option value="<?=$categorie['c_id']?>"><?=$categorie['c_title']?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <small id="catHelp" class="form-text text-muted">Sélectionnez une catégorie pour l'article</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="author">Auteur de l'article:</label> <br>
+                    <select class="form-control rounded" name="author" id="author" value="<?=$auteur?>">
+                      
+                           
+                            <?php foreach($users as $user):?>
+                                <option value="<?=$user['u_id']?>"><?=$user['u_firstname']?></option>
+                                <?php endforeach;?>
+                  
+                    </select>
+                    <small id="catHelp" class="form-text text-muted">Sélectionnez l'auteur de l'article</small>
+                </div>
+            </div>
+        </div>
+        
+         <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="role">Rôle</label>
+                    <select class="form-control" id="role" name="role">
+                        <?php foreach(ROLES as $role):?>
+                            <option value="<?=$role?>" <?php if($role == $roleUser):?>selected<?php endif;?>><?=$role?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <small id="catHelp" class="form-text text-muted">Sélectionnez un rôle pour l'utilisateur</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" name="valide"  id="valide" <?php if($valideArticle == true):?>checked=""<?php endif;?>>
+                <label class="custom-control-label" for="valide">Publier l'article</label>
+                <small id="publieHelp" class="form-text text-muted">L'article sera mis en brouillon si vous décochez cette case !</small>
+            </div>
+        </div>
+        
+        <button type="submit" name=" submit" class="btn btn-primary rounded px-5 py-3">Créer l'article</button>
+    </fieldset>
+</form>
+
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        
+        tinymce.init({ selector:'textarea' });
+      
+     
+    });

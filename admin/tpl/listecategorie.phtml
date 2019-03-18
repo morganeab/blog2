@@ -1,0 +1,24 @@
+<p class="text-right"><a href="addcategorie.php" class="btn btn-primary"><i class="icon-plus-square"></i> Ajouter une catégorie</a></p>
+    <table id="tableDonnee" class="table">
+    <thead>
+        <tr>
+        
+            <th scope="col">Nom de la catégorie</th>
+            <th scope="col">Catégorie parent</th>
+            <th scope="col">Actions</th>
+            
+        </tr >
+    </thead>
+    <tbody>
+          <?php foreach($categories as $categorie):?>
+ 
+            <tr>
+               
+                <td><?=$categorie['c_title']?></td>
+                <td><?=$categorie['parent']?></td>
+                <td><a href="editcategorie.php?id=<?=$categorie['c_id']?>"><i class="fa fa-edit"></i></a> - <a href="deletecategorie.php?id=<?=$categorie['c_id']?>" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a></td>
+            </tr>   
+        <?php endforeach;?>
+    </tbody>
+</table>
+

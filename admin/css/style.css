@@ -1,0 +1,82 @@
+
+body {
+    background-image:url('../img/2.jpg');
+    background-repeat:no-repeat;
+    background-size:cover; 
+    color:white;
+    text-align:center;
+}
+
+header {
+    background-color:#593196;
+}
+
+header p {
+    font-size: 3rem;
+    text-align:center;
+ 
+}
+.degrade {
+    background: -webkit-gradient(linear, left top, left bottom, from(#b7deed), to(#ff7cd8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+label {
+    font-size:1.5rem;    
+}
+textarea, input, button {
+background: -webkit-gradient(linear, left top, left bottom, from(#b7deed), to(#ff7cd8)); 
+
+
+}
+
+
+input {
+    padding:10px 40px;
+    color:black;
+}
+
+button {
+    padding:10px 40px;
+}
+	
+header img {
+    width:15%;
+    border-radius: 100%;
+ 
+}
+header nav {
+    margin:30px;
+    padding-bottom:50px;
+}
+header nav a {
+    color:white;
+    font-size:2rem;
+    padding:30px;
+    text-decoration:none;
+}
+
+header nav a:hover {
+   
+    
+}
+
+table, tr, th, td {
+    border:2px solid #000;
+
+}
+
+.big
+{
+    font-size:1.6rem;
+}
+
+.green
+{
+    color:forestgreen;
+}
+
+.red
+{
+    color:red;
+}

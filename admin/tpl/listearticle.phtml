@@ -1,0 +1,36 @@
+<p class="text-right"><a href="addarticle.php" class="btn btn-primary"><i class="icon-plus-square"></i> Ajouter un article</a></p>
+    <table id="tableDonnee" class="table">
+    <thead>
+        <tr>
+        
+            <th scope="col">Titre de l'article</th>
+            <th scope="col">Date de publication</th>
+            <th scope="col">Contenu de l'article</th>
+            <th scope="col">Image</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Auteur</th>
+            <th scope="col">Valide</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Actions</th>
+            
+        </tr >
+    </thead>
+    <tbody>
+          <?php foreach($articles as $article):?>
+ 
+            <tr>
+               
+                <td><?=$article['a_title']?></td>
+                <td><?=$article['a_date_published']?></td>
+                <td><?=$article['a_content']?></td>
+                <td><?php if($article['a_picture'] != null):?><img width="70" src="<?=$chemin_destination.$article['a_picture']?>"><?php endif;?></td>
+                <td><?=$article['c_title']?></td>
+                <td><?=$article['u_firstname']?></td>
+                <td><a href="publisharticle.php?id=<?=$article['a_id']?>"><i class="big <?php if($article['a_valide']==true):?>green icon-toggle-right<?php else:?>red icon-toggle-left<?php endif;?>"></i></a></td>
+                <td><?=$article['a_role']?></td>
+                <td><a href="editarticle.php?id=<?=$article['a_id']?>"><i class="fa fa-edit"></i></a> - <a href="deletearticle.php?id=<?=$article['a_id']?>" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a></td>
+            </tr>   
+        <?php endforeach;?>
+    </tbody>
+</table>
+

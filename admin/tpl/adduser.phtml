@@ -1,0 +1,119 @@
+<form action="<?php if(is_null($id)):?>adduser.php<?php else:?>edituser.php<?php endif;?>" method="POST" enctype="multipart/form-data">
+    
+    <?php if(isset($errorForm) && count($errorForm) > 0):?>
+        <?php foreach($errorForm as $error):?>
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    <li><?=$error?></li>
+                </ul>
+            </div>
+         <?php endforeach;?>
+    <?php endif;?>
+    
+    
+    <?php if(!is_null($id)):?>
+    <input type="hidden" value="<?=$id?>" name="id">
+  <?php endif;?>
+    
+    <fieldset>
+        
+        <div class="form-group ">
+            <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="prenom">Prénom: </label>
+                    <input type="text" class="form-control rounded" id="prenom" name="prenom" value="<?=$prenom?>">
+                    <small id="prenomHelp" class="form-text text-muted">Saisissez le prénom de l'utilisateur</small>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="nom">Nom: </label>
+                    <input type="text" class="form-control rounded" name="nom" id="nom" value="<?=$nom?>" >
+                    <small id="nomHelp" class="form-text text-muted">Saisissez le nom de l'utilisateur</small>
+                </div>
+            </div>
+        </div>
+         
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="email">Email:</label>
+                     <input type="email" class="form-control rounded" name="email" id="email" value="<?=$email?>" >
+                    <small id="emailHelp" class="form-text text-muted">Saisissez l'email de l'utilisateur </small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4">
+                    <input type="password" class="form-control" id="motdepasse" name="motdepasse" placeholder="Mot de passe">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row d-flex flex-row justify-content-center">    
+                <div class="col-4">
+                    <input type="password" class="form-control" id="verifmotdepasse" name="verifmotdepasse" placeholder="Confirmez le mot de passe">
+                </div>
+            </div>
+        </div>
+       
+        
+       
+        <div class="form-group">
+             <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <label for="role">Rôle</label>
+                    <select class="form-control" id="role" name="role">
+                        <?php foreach(ROLES as $role):?>
+                            <option value="<?=$role?>" <?php if($role == $roleUser):?>selected<?php endif;?>><?=$role?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <small id="catHelp" class="form-text text-muted">Sélectionnez un rôle pour l'utilisateur</small>
+                </div>
+            </div>
+        </div>
+            
+        
+        
+        
+        
+        <div class="form-group">
+            <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" name="valide"  id="valide" <?php if($valide == true):?>checked=""<?php endif;?>>
+                        <label class="custom-control-label" for="valide">Activer l'utilisateur</label>
+                        <small id="publieHelp" class="form-text text-muted">L'utilisateur ne pourra pas se loguer si vous désactivez cette option !</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="form-group">
+            <div class="row d-flex flex-row justify-content-center">
+                <div class="col-4 ">
+                    <a href="listearticle.php" class="btn btn-outline-primary">Annuler</a>
+                    <button type="submit" class="btn btn-primary"><?php if(is_null($id)):?>Créer l'utilisateur<?php else:?>Modifier l'utilisateur<?php endif;?></button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    
+</form>
+
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        
+        tinymce.init({ selector:'textarea' });
+      
+     
+    });
